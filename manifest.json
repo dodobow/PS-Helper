@@ -1,0 +1,10 @@
+{
+    "manifest_version" : 3,
+    "name" : "PS 길라잡이",
+    "version" : "1.0",
+    "description" : "Solved.ac 데이터를 기반으로 PS 학습을 도와주는 확장 프로그램",
+    "action" : {
+        "default_popup" : "popup.html",
+        "default_title" : "PS 길라잡이 열기"
+    }
+}
