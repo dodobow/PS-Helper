@@ -6,5 +6,8 @@
     "action" : {
         "default_popup" : "popup.html",
         "default_title" : "PS 길라잡이 열기"
-    }
+    },
+    "host_permissions" : [
+        "https://solved.ac/*"
+    ]
 }
