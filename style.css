@@ -1,0 +1,58 @@
+body {
+    width: 350px;
+    padding: 20px;
+    font-family: 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    background-color: #f7f9fa;
+    color: #333;
+}
+
+h1 {
+    font-size: 20px;
+    color: #17CE3A;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus {
+    border-color: #17CE3A;
+}
+
+button {
+    padding: 10px 16px;
+    background-color: #17CE3A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #197e2b;
+}
+
+#result {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    line-height: 1.6;
+    font-size: 15px;
+}

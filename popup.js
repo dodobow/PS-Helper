@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else if (data.tier == 31) {
                 tierName = 'Master';
             }
-            let tierColor = TIER_COLORS[data.tier];
+            const tierColor = TIER_COLORS[data.tier];
             resultDiv.innerHTML = `
             ${data.handle}<br>
             레이팅 : <span style="color: ${tierColor}">${data.rating}</span><br>
