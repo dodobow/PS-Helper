@@ -56,3 +56,33 @@ button:hover {
     line-height: 1.6;
     font-size: 15px;
 }
+
+.problem-link {
+    display: block;
+    background: white;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.problem-link:hover {
+    background: #f1f3f5;
+    border-color: #20C20E;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+#recommendBtn {
+    width: 100%;
+    background-color: #17CE3A;
+    margin-top: 5px;
+}
+
+#recommendBtn:hover {
+    background-color: #197e2b; 
+}

@@ -9,11 +9,18 @@
         
         <div class="input-group">
             <input type="text" id="solvedId" placeholder="백준 핸들 입력">
-            <button>조회</button>
+            <button id="loginBtn">조회</button>
         </div>
 
         <div id="result">
             아이디를 입력하고<br>티어를 확인해보세요!
+        </div>
+        
+        <div id="recommend-section" style="display: none; margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px;">
+            <button id="recommendBtn">
+                오늘의 문제 뽑기 🎲
+            </button>
+            <div id="problem-view" style="margin-top: 15px; font-size: 14px; color: #333;"></div>
         </div>
         <script src="popup.js"></script>
     </body>

@@ -9,16 +9,21 @@ const TIER_COLORS = [
     '#AC9FFF'
 ];
 
+let cachedUserData = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector('button');
+    const loginButton = document.getElementById('loginBtn');
     const inputField = document.getElementById('solvedId');
     const resultDiv = document.getElementById('result');
+    const recommendButton = document.getElementById('recommendBtn');
 
-    button.addEventListener('click', () => handleSearch(inputField, resultDiv));
+    loginButton.addEventListener('click', () => handleSearch(inputField, resultDiv));
 
     inputField.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') handleSearch(inputField, resultDiv);
     });
+
+    recommendButton.addEventListener('click', () => recommendProblem(cachedUserData.tier));
     
     inputField.focus();
 
@@ -39,20 +44,28 @@ async function handleSearch(inputField, resultDiv) {
         }
         try {
             const data = await fetchSolvedData(userId);
+            cachedUserData = data;
             chrome.storage.local.set({solvedId : userId});
+            
             const tierInfo = calculateTierInfo(data.tier);
             updateResultUI(resultDiv, data, tierInfo);
+
+            const recommendSection = document.getElementById('recommend-section');
+            if (recommendSection) {
+                recommendSection.style.display = 'block';
+            }
         } catch (error) {
             resultDiv.innerHTML = `<span style="color: red;">${error.message}</span>`;
+            document.getElementById('recommend-section').style.display = 'none';
         }
 }
 
 async function fetchSolvedData(userId) {
     const url = `https://solved.ac/api/v3/user/show?handle=${userId}`;
     const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('유저 정보를 가져올 수 없습니다.');
-        }
+    if (!response.ok) {
+        throw new Error('유저 정보를 가져올 수 없습니다.');
+    }
     return await response.json();
 }
 
@@ -80,4 +93,35 @@ function updateResultUI(targetDiv, userData, tierInfo) {
         </div>
     </div>
     `;
+}
+
+async function recommendProblem(userTier) {
+    const problemDiv = document.getElementById('problem-view');
+    problemDiv.innerHTML = '문제 찾는 중...';
+
+    try {
+        const queryString = '*' + Math.max(userTier - 10, 1) + '..' + Math.max(userTier - 4, 3) + ' !@$me %ko s#100..';
+        const url = `https://solved.ac/api/v3/search/problem?query=${encodeURIComponent(queryString)}&sort=random`;
+
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('문제 정보를 가져올 수 없습니다.');
+        }
+        const data = await response.json();
+        console.log(data);
+
+        if (data.count === 0) {
+            problemDiv.innerHTML = '추천할 문제가 다 떨어졌어요 😭';
+            return;
+        }
+        const recommendedProblem = data.items[0];
+        problemDiv.innerHTML = `
+            <a href="https://www.acmicpc.net/problem/${recommendedProblem.problemId}" target="_blank" class="problem-link">
+                <span style="font-weight:bold; color:#0078FF;">${recommendedProblem.problemId}번</span>
+                <span>${recommendedProblem.titleKo}</span>
+            </a>
+        `;
+    } catch (error) {
+        problemDiv.innerHTML = `<span style="color: red;">${error.message}</span>`;
+    }
 }
