@@ -14,36 +14,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputField = document.getElementById('solvedId');
     const resultDiv = document.getElementById('result');
 
-    button.addEventListener('click', async () => {
-        const userId = inputField.value;
+    button.addEventListener('click', () => handleSearch(inputField, resultDiv));
+
+    inputField.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') handleSearch(inputField, resultDiv);
+    });
+    inputField.focus();
+});
+
+async function handleSearch(inputField, resultDiv) {
+    const userId = inputField.value;
         if (!userId) {
             alert('ID를 입력해주세요.');
+            inputField.focus();
             return;
         }
-        const url = `https://solved.ac/api/v3/user/show?handle=${userId}`;
         try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('유저 정보를 가져올 수 없습니다.');
-            }
-            const data = await response.json();
-            console.log(data);
-            
-            let tierName = "Unrated";
-            if (0 < data.tier && data.tier < 31) {
-                tierName = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Ruby'][Math.floor((data.tier - 1) / 5)] + ' ' + ['V', 'IV', 'III', 'II', 'I'][(data.tier + 4) % 5];
-            }
-            else if (data.tier == 31) {
-                tierName = 'Master';
-            }
-            const tierColor = TIER_COLORS[data.tier];
-            resultDiv.innerHTML = `
-            ${data.handle}<br>
-            레이팅 : <span style="color: ${tierColor}">${data.rating}</span><br>
-            티어 : <span style="color: ${tierColor}">${tierName}</span>
-            `
+            const data = await fetchSolvedData(userId);
+            const tierInfo = calculateTierInfo(data.tier);
+            updateResultUI(resultDiv, data, tierInfo);
         } catch (error) {
-            alert('오류가 발생했습니다. ' + error.message);
+            resultDiv.innerHTML = `<span style="color: red;">${error.message}</span>`;
         }
-    });
-});
+}
+
+async function fetchSolvedData(userId) {
+    const url = `https://solved.ac/api/v3/user/show?handle=${userId}`;
+    const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error('유저 정보를 가져올 수 없습니다.');
+        }
+    return await response.json();
+}
+
+function calculateTierInfo(tierNum) {
+    let name = ''
+    if (tierNum == 0) {
+        name = 'Unrated';
+    } else if (tierNum == 31) {
+        name = 'Master';
+    } else {
+        name = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Ruby'][Math.floor((tierNum - 1) / 5)] + ' ' + ['V', 'IV', 'III', 'II', 'I'][(tierNum + 4) % 5];
+    }
+    return {name, color : TIER_COLORS[tierNum]};
+}
+
+function updateResultUI(targetDiv, userData, tierInfo) {
+    targetDiv.innerHTML = `
+    <div style="margin-top: 20px;">
+        <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">${userData.handle}</div>
+        <div style="font-size: 14px; color: #666;">
+            레이팅 : <span style="color: ${tierInfo.color}; font-weight: bold;">${userData.rating}</span>
+        </div>
+        <div style="font-size: 14px; color: #666;">
+            티어 : <span style="color: ${tierInfo.color}; font-weight: bold;">${tierInfo.name}</span>
+        </div>
+    </div>
+    `;
+}
