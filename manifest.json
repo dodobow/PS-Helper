@@ -9,5 +9,8 @@
     },
     "host_permissions" : [
         "https://solved.ac/*"
+    ],
+    "permissions" : [
+        "storage"
     ]
 }

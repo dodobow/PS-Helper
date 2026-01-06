@@ -19,7 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
     inputField.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') handleSearch(inputField, resultDiv);
     });
+    
     inputField.focus();
+
+    chrome.storage.local.get(['solvedId'], (result) => {
+        if (result.solvedId) {
+            inputField.value = result.solvedId;
+            handleSearch(inputField, resultDiv);
+        }
+    });
 });
 
 async function handleSearch(inputField, resultDiv) {
@@ -31,6 +39,7 @@ async function handleSearch(inputField, resultDiv) {
         }
         try {
             const data = await fetchSolvedData(userId);
+            chrome.storage.local.set({solvedId : userId});
             const tierInfo = calculateTierInfo(data.tier);
             updateResultUI(resultDiv, data, tierInfo);
         } catch (error) {
@@ -61,7 +70,7 @@ function calculateTierInfo(tierNum) {
 
 function updateResultUI(targetDiv, userData, tierInfo) {
     targetDiv.innerHTML = `
-    <div style="margin-top: 20px;">
+    <div>
         <div style="font-size: 18px; font-weight: bold; margin-bottom: 5px;">${userData.handle}</div>
         <div style="font-size: 14px; color: #666;">
             레이팅 : <span style="color: ${tierInfo.color}; font-weight: bold;">${userData.rating}</span>
