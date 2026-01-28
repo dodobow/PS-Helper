@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PS 길라잡이 설정</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="options-body">
+    <div class="container">
+        <h1>🎯 당신의 목표는 무엇인가요?</h1>
+        <p class="subtitle">목표에 맞춰서 문제를 추천해 드릴게요!</p>
+
+        <div class="goal-container">
+            <div class="goal-card" id="goal-beginner" data-value="beginner">
+                <div class="icon">🌱</div>
+                <h3>코딩 입문</h3>
+                <p>문법부터 차근차근 배우고 싶어요.</p>
+            </div>
+
+            <div class="goal-card" id="goal-job" data-value="job">
+                <div class="icon">💼</div>
+                <h3>취업 / 코테</h3>
+                <p>실전 코딩테스트 합격이 목표예요.</p>
+            </div>
+
+            <div class="goal-card" id="goal-contest" data-value="contest">
+                <div class="icon">🏆</div>
+                <h3>대회 / 취미</h3>
+                <p>어려운 알고리즘에 도전하고 싶어요.</p>
+            </div>
+        </div>
+
+        <div id="status-msg"></div>
+    </div>
+    <script src="options.js"></script>
+</body>
+</html>

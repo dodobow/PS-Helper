@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputField = document.getElementById('solvedId');
     const resultDiv = document.getElementById('result');
     const recommendButton = document.getElementById('recommendBtn');
+    const settingButton = document.getElementById('settingBtn');
 
     loginButton.addEventListener('click', () => handleSearch(inputField, resultDiv));
 
@@ -33,6 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
             handleSearch(inputField, resultDiv);
         }
     });
+
+    if (settingButton) {
+        settingButton.addEventListener('click', () => {
+            if (chrome.runtime.openOptionsPage) {
+                chrome.runtime.openOptionsPage();
+            } else {
+                window.open(chrome.runtime.getURL('options.html'));
+            }
+        });
+    }
 });
 
 async function handleSearch(inputField, resultDiv) {

@@ -1,9 +1,23 @@
 body {
-    width: 350px;
-    padding: 20px;
-    font-family: 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    font-family: 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     background-color: #f7f9fa;
     color: #333;
+    margin: 0
+}
+
+.popup-body {
+    width: 350px;
+    padding: 20px;
+}
+
+.options-body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -85,4 +99,67 @@ button:hover {
 
 #recommendBtn:hover {
     background-color: #197e2b; 
+}
+
+/* option page */
+
+.container {
+    text-align: center;
+    max-width: 800px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.goal-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.goal-card {
+    background: white;
+    border: 2px solid #eee;
+    border-radius: 16px;
+    padding: 30px;
+    width: 200px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.goal-card.selected {
+    border-color: #17CE3A;
+    background-color: #f0fff4;
+    box-shadow: 0 0 0 4px rgba(23, 206, 58, 0.1);
+}
+
+.goal-card .icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.goal-card h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+}
+
+.goal-card p {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.4;
+}
+
+#status-msg {
+    margin-top: 30px;
+    height: 20px;
+    font-size: 15px;
+    color: #17CE3A;
+    font-weight: bold;
 }

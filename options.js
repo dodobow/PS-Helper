@@ -1,0 +1,47 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.goal-card');
+    const statusMsg = document.getElementById('status-msg');
+    const goalMsg = {
+        'beginner' : '코딩 입문을 위해서는 간단한 브론즈, 실버 문제를 풀며 문법에 익숙해지는 과정이 중요해요!',
+        'job' : '코딩테스트의 안정적인 합격을 위해서는 어려운 실버 문제와 골드 문제들을 푸는 연습이 필요해요!',
+        'contest' : '대규모 대회 수상이 목적이라면, 골드는 물론이고 플레티넘 문제들도 풀 수 있어야 해요!'
+    };
+    
+    function updateStatusMessage(goal) {
+        if (goalMsg[goal]) {
+            statusMsg.textContent = goalMsg[goal];
+        }
+    }
+
+    chrome.storage.local.get(['solvedId'], (res) => {
+        const userId = res.solvedId;
+        if (!userId) {
+            alert('우선 백준 계정을 연동해주세요.');
+            window.close();
+            return;
+        }
+
+        const storageKey = `goal_${userId}`;
+        chrome.storage.local.get([storageKey], (result) => {
+            const savedGoal = result[storageKey];
+            if (savedGoal) {
+                const targetCard = document.querySelector(`.goal-card[data-value="${savedGoal}"]`);
+                if (targetCard) {
+                    targetCard.classList.add('selected');
+                    updateStatusMessage(savedGoal);
+                }
+            }
+        });
+        
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                cards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                const selectedGoal = card.getAttribute('data-value');
+                chrome.storage.local.set({[storageKey] : selectedGoal}, () => {
+                    updateStatusMessage(selectedGoal);
+                });
+            });
+        });
+    })
+});
