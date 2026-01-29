@@ -109,9 +109,18 @@ function updateResultUI(targetDiv, userData, tierInfo) {
 async function recommendProblem(userTier) {
     const problemDiv = document.getElementById('problem-view');
     problemDiv.innerHTML = '문제 찾는 중...';
-
+    
     try {
-        const queryString = '*' + Math.max(userTier - 10, 1) + '..' + Math.max(userTier - 4, 3) + ' !@$me %ko s#100..';
+        const userId = cachedUserData.handle;
+        const goalKey = `goal_${userId}`;
+        const diffKey = `diff_${userId}`;
+
+        const storedData = await getStorageData([goalKey, diffKey]);
+        const userGoal = storedData[goalKey];
+        const userDiff = storedData[diffKey] ? storedData[diffKey] : 0;
+
+        
+        const queryString = calculateRecommendTier(userTier, userGoal, parseInt(userDiff));
         const url = `https://solved.ac/api/v3/search/problem?query=${encodeURIComponent(queryString)}&sort=random`;
 
         const response = await fetch(url);
@@ -119,7 +128,6 @@ async function recommendProblem(userTier) {
             throw new Error('문제 정보를 가져올 수 없습니다.');
         }
         const data = await response.json();
-        console.log(data);
 
         if (data.count === 0) {
             problemDiv.innerHTML = '추천할 문제가 다 떨어졌어요 😭';
@@ -135,4 +143,27 @@ async function recommendProblem(userTier) {
     } catch (error) {
         problemDiv.innerHTML = `<span style="color: red;">${error.message}</span>`;
     }
+}
+
+function calculateRecommendTier(userTier, userGoal, userDiff) {
+    let lo = Math.max(Math.floor(userTier / 2) + userDiff, 1);
+    let hi = lo + Math.floor(userTier / 5) + userDiff + 3;
+    if (userGoal) {
+        if (userGoal === 'beginner') {
+            lo = Math.min(lo, 1);
+            hi = Math.max(hi, 10);
+        } else if (userGoal === 'job') {
+            lo = Math.min(lo, 8);
+            hi = Math.max(hi, 15);
+        }
+    }
+    return `*${lo}..${hi} !@$me %ko s#100..`;
+}
+
+function getStorageData(keys) {
+    return new Promise((resolve) => {
+        chrome.storage.local.get(keys, (result) => {
+            resolve(result);
+        });
+    });
 }

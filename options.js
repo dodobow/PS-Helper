@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const cards = document.querySelectorAll('.goal-card');
     const statusMsg = document.getElementById('status-msg');
+    const diffCards = document.querySelectorAll('.diff-card');
     const goalMsg = {
         'beginner' : '코딩 입문을 위해서는 간단한 브론즈, 실버 문제를 풀며 문법에 익숙해지는 과정이 중요해요!',
         'job' : '코딩테스트의 안정적인 합격을 위해서는 어려운 실버 문제와 골드 문제들을 푸는 연습이 필요해요!',
@@ -21,9 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const storageKey = `goal_${userId}`;
-        chrome.storage.local.get([storageKey], (result) => {
-            const savedGoal = result[storageKey];
+        const goalKey = `goal_${userId}`;
+        chrome.storage.local.get([goalKey], (result) => {
+            const savedGoal = result[goalKey];
             if (savedGoal) {
                 const targetCard = document.querySelector(`.goal-card[data-value="${savedGoal}"]`);
                 if (targetCard) {
@@ -33,15 +34,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
+        const diffKey = `diff_${userId}`;
+        chrome.storage.local.get([diffKey], (result) => {
+            const targetValue = result[diffKey] ? result[diffKey] : '0';
+            diffCards.forEach(c => c.classList.remove('selected'));
+            const targetCard = document.querySelector(`.diff-card[data-value="${targetValue}"]`);
+            if (targetCard) targetCard.classList.add('selected');
+        });
+
         cards.forEach(card => {
             card.addEventListener('click', () => {
                 cards.forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
                 const selectedGoal = card.getAttribute('data-value');
-                chrome.storage.local.set({[storageKey] : selectedGoal}, () => {
+                chrome.storage.local.set({[goalKey] : selectedGoal}, () => {
                     updateStatusMessage(selectedGoal);
                 });
             });
         });
-    })
+
+        diffCards.forEach(card => {
+            card.addEventListener('click', () => {
+                diffCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                const selectedDiff = card.getAttribute('data-value');
+                chrome.storage.local.set({[diffKey] : selectedDiff}, () => {
+                    updateStatusMessage(selectedDiff);
+                });
+            });
+        });
+    });
 });
