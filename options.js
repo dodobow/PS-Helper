@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const cards = document.querySelectorAll('.goal-card');
+    const goalCards = document.querySelectorAll('.goal-card');
     const statusMsg = document.getElementById('status-msg');
     const diffCards = document.querySelectorAll('.diff-card');
     const goalMsg = {
@@ -42,9 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetCard) targetCard.classList.add('selected');
         });
 
-        cards.forEach(card => {
+        goalCards.forEach(card => {
             card.addEventListener('click', () => {
-                cards.forEach(c => c.classList.remove('selected'));
+                goalCards.forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
                 const selectedGoal = card.getAttribute('data-value');
                 chrome.storage.local.set({[goalKey] : selectedGoal}, () => {

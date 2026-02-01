@@ -110,7 +110,7 @@ button:hover {
 
 .subtitle {
     color: #666;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .goal-container {
@@ -166,19 +166,18 @@ button:hover {
 
 /* --- [추가] 구분선 및 난이도 섹션 스타일 --- */
 
-/* 섹션 사이 구분선 */
 .divider {
     width: 100%;
     height: 1px;
     background-color: #eee;
-    margin: 40px 0; /* 위아래 여백 넉넉하게 */
+    margin: 30px 0;
 }
 
 .difficulty-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* 버튼 사이 간격 */
-    flex-wrap: wrap; /* 화면 좁아지면 줄바꿈 */
+    gap: 10px;
+    flex-wrap: wrap;
     margin-bottom: 10px;
 }
 
@@ -186,7 +185,7 @@ button:hover {
     padding: 12px 24px;
     background: white;
     border: 1px solid #ddd;
-    border-radius: 50px; /* 알약 모양 */
+    border-radius: 50px;
     color: #666;
     font-size: 14px;
     font-weight: 500;
@@ -206,4 +205,62 @@ button:hover {
     color: white;
     font-weight: bold;
     box-shadow: 0 4px 10px rgba(23, 206, 58, 0.3);
+}
+
+/* --- [수정] 옵션 페이지 폰트 사이즈 업그레이드 --- */
+
+/* 1. 메인 제목 (당신의 목표는...?) */
+.container h1 {
+    font-size: 32px; /* 20px -> 32px 대폭 확대 */
+    margin-bottom: 15px;
+}
+
+/* 2. 부제목 (목표에 맞춰서...) */
+.subtitle {
+    font-size: 16px; /* 좀 더 잘 보이게 */
+    color: #555; /* 색을 살짝 진하게 해서 가독성 UP */
+}
+
+/* 3. 섹션 제목 (난이도를 조절해볼까요?) */
+.container h2 {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* 4. 목표 카드 내부 */
+.goal-card {
+    /* 카드가 글씨 커진 걸 감당할 수 있게 가로폭을 조금 늘리자 */
+    width: 220px; 
+    padding: 35px 25px;
+}
+
+.goal-card .icon {
+    font-size: 54px; /* 아이콘도 시원하게! 40px -> 54px */
+    margin-bottom: 20px;
+}
+
+.goal-card h3 {
+    font-size: 20px; /* 제목 강조 */
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.goal-card p {
+    font-size: 15px; /* 13px -> 15px (이게 핵심!) */
+    line-height: 1.6; /* 줄 간격을 넓혀서 읽기 편하게 */
+    word-break: keep-all; /* 한글 단어 중간에 안 끊기게 */
+}
+
+/* 5. 난이도 버튼 (알약) */
+.diff-card {
+    font-size: 16px; /* 14px -> 16px */
+    padding: 14px 28px; /* 버튼 덩치도 살짝 키우기 */
+}
+
+/* 6. 하단 상태 메시지 */
+#status-msg {
+    font-size: 18px; /* 15px -> 18px */
+    margin-top: 40px; /* 위쪽 여백을 줘서 시선 집중 */
+    height: 30px; /* 글자가 커졌으니 높이도 확보 */
 }
