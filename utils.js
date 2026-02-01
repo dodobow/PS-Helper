@@ -22,15 +22,15 @@ function calculateTierInfo(tierNum) {
 
 function calculateRecommendTier(userTier, userGoal, userDiff) {
     let lo = Math.max(Math.floor(userTier / 2) + userDiff, 1);
-    let hi = lo + Math.floor(userTier / 5) + userDiff + 3;
+    let hi = lo + Math.floor(userTier / 5) + 2;
     if (userGoal) {
         if (userGoal === 'beginner') {
             lo = Math.min(lo, 1);
-            hi = Math.max(hi, 10);
+            hi = Math.min(hi, 10);
         } else if (userGoal === 'job') {
             lo = Math.min(lo, 8);
-            hi = Math.max(hi, 15);
+            hi = Math.min(hi, 15);
         }
     }
-    return `*${lo}..${hi} !@$me %ko s#100..`;
+    return {lo : lo, hi : hi};
 }

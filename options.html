@@ -7,7 +7,7 @@
 </head>
 <body class="options-body">
     <div class="container">
-        <h1>🎯 당신의 목표는 무엇인가요?</h1>
+        <h1 id="option-title"></h1>
         <p class="subtitle">목표에 맞춰서 문제를 추천해 드릴게요!</p>
 
         <div class="goal-container">
@@ -29,11 +29,16 @@
                 <p>더 어려운 문제들로<br>대회에 도전하고 싶어요.</p>
             </div>
         </div>
+        <div id="status-msg"></div>
 
         <div class="divider"></div>
 
         <h2>🎚️ 난이도를 조절해볼까요?</h2>
         <p class="subtitle">기본 추천 범위에서 난이도를 살짝 조정할 수 있어요.</p>
+
+        <div class="range-preview-box">
+            🔭 현재 추천 티어 :<span id="expected-tier-display">데이터를 불러오는 중...</span>
+        </div>
 
         <div class="difficulty-container">
             <div class="diff-card" data-value="-2">쉽게</div>
@@ -42,7 +47,6 @@
             <div class="diff-card" data-value="1">조금 어렵게</div>
             <div class="diff-card" data-value="2">어렵게</div>
         </div>
-        <div id="status-msg"></div>
     </div>
     <script src="utils.js"></script>
     <script src="options.js"></script>

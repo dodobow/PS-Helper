@@ -45,7 +45,10 @@ async function handleSearch(inputField, resultDiv) {
         try {
             const data = await fetchSolvedData(userId);
             cachedUserData = data;
-            chrome.storage.local.set({solvedId : userId});
+            chrome.storage.local.set({
+                solvedId : userId,
+                solvedTier : data.tier
+            });
             
             const tierInfo = calculateTierInfo(data.tier);
             updateResultUI(resultDiv, data, tierInfo);
@@ -97,7 +100,8 @@ async function recommendProblem(userTier) {
         const userDiff = storedData[diffKey] ? storedData[diffKey] : 0;
 
         
-        const queryString = calculateRecommendTier(userTier, userGoal, parseInt(userDiff));
+        const recommendRange = calculateRecommendTier(userTier, userGoal, parseInt(userDiff));
+        const queryString = `*${recommendRange.lo}..${recommendRange.hi} !@$me %ko s#100..`;
         const url = `https://solved.ac/api/v3/search/problem?query=${encodeURIComponent(queryString)}&sort=random`;
 
         const response = await fetch(url);
