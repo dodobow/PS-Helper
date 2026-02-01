@@ -1,14 +1,3 @@
-const TIER_COLORS = [
-    '#000000',
-    '#ad5600', '#b85b00', '#c46100', '#cf6700', '#db6c00',
-    '#435f7a', '#476582', '#4b6b8a', '#507292', '#54789a',
-    '#ec9a00', '#fba400', '#ffae00', '#ffb800', '#ffc300',
-    '#25d69b', '#27e2a4', '#28edac', '#2af8b4', '#2cffbc',
-    '#00b4fc', '#00c0ff', '#00ccff', '#00d8ff', '#00e4ff',
-    '#cc004e', '#dd0054', '#ee005b', '#ff0062', '#ff0068',
-    '#AC9FFF'
-];
-
 let cachedUserData = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     recommendButton.addEventListener('click', () => recommendProblem(cachedUserData.tier));
-    
+
     inputField.focus();
 
     chrome.storage.local.get(['solvedId'], (result) => {
