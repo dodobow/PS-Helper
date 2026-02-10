@@ -1,55 +1,88 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>PS 길라잡이 설정</title>
-        <link rel="stylesheet" href="../common.css">
-        <link rel="stylesheet" href="options.css">
-    </head>
-    <body class="options-body">
-        <div class="container">
-            <h1 id="option-title"></h1>
-            <p class="subtitle">목표에 맞춰서 문제를 추천해 드릴게요!</p>
+<head>
+    <meta charset="UTF-8">
+    <title>PS 길라잡이 설정</title>
+    <link rel="stylesheet" href="../common.css">
+    <link rel="stylesheet" href="options.css">
+</head>
+<body class="options-body">
+    
+    <div class="dashboard-container">
+        
+        <header class="dashboard-header">
+            <h1 id="dashboard-title"></h1>
+            <p>나만의 알고리즘 트레이닝 설정을 관리하고 내실을 다져보세요.</p>
+        </header>
 
-            <div class="goal-container">
-                <div class="goal-card" id="goal-beginner" data-value="beginner">
-                    <div class="icon">🌱</div>
-                    <h3>코딩 입문</h3>
-                    <p>기초 문법부터 차근차근<br>코딩을 배우고 싶어요.</p>
+        <main class="dashboard-grid">
+            
+            <section class="card settings-panel">
+                <div class="card-header">
+                    <h2>🎯 목표 및 난이도 설정</h2>
+                </div>
+                
+                <div class="card-body">
+                    <p class="section-label">나의 목표는?</p>
+                    <div class="goal-container">
+                        <div class="goal-card" id="goal-beginner" data-value="beginner">
+                            <div class="icon">🌱</div>
+                            <h3>입문</h3>
+                        </div>
+                        <div class="goal-card" id="goal-job" data-value="job">
+                            <div class="icon">💼</div>
+                            <h3>취업</h3>
+                        </div>
+                        <div class="goal-card" id="goal-contest" data-value="contest">
+                            <div class="icon">🏆</div>
+                            <h3>대회</h3>
+                        </div>
+                    </div>
+                    <div id="status-msg"></div>
+
+                    <div class="divider"></div>
+
+                    <p class="section-label">난이도 미세 조정</p>
+                    <div class="range-preview-box">
+                        🔭 추천 범위 : <span id="expected-tier-display">로딩 중...</span>
+                    </div>
+                    <div class="difficulty-container">
+                        <div class="diff-card" data-value="-2">쉽게</div>
+                        <div class="diff-card" data-value="-1">조금 쉽게</div>
+                        <div class="diff-card selected" data-value="0">보통</div>
+                        <div class="diff-card" data-value="1">조금 어렵게</div>
+                        <div class="diff-card" data-value="2">어렵게</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card analysis-panel">
+                <div class="card-header">
+                    <h2>🧬 내실 분석 리포트</h2>
+                    <button id="refresh-analysis-btn" class="refresh-btn" title="새로고침">🔄</button>
                 </div>
 
-                <div class="goal-card" id="goal-job" data-value="job">
-                    <div class="icon">💼</div>
-                    <h3>취업 / 코테</h3>
-                    <p>취업을 위한 실전 기업<br>코딩테스트 합격이 목표예요.</p>
+                <div class="card-body">
+                    <p class="subtitle-small">Solved.ac 데이터를 기반으로 취약점을 분석합니다.</p>
+                    
+                    <div id="analysis-container">
+                        <div id="loading-spinner" class="spinner-container">
+                            <div class="spinner"></div>
+                            <p>데이터 분석 중...</p>
+                        </div>
+
+                        <div id="analysis-result" style="display: none;">
+                            <div class="summary-box" id="analysis-comment"></div>
+                            <div class="tag-grid" id="tag-grid"></div>
+                        </div>
+                    </div>
                 </div>
+            </section>
 
-                <div class="goal-card" id="goal-contest" data-value="contest">
-                    <div class="icon">🏆</div>
-                    <h3>대회 / 취미</h3>
-                    <p>더 어려운 문제들로<br>대회에 도전하고 싶어요.</p>
-                </div>
-            </div>
-            <div id="status-msg"></div>
+        </main>
+    </div>
 
-            <div class="divider"></div>
-
-            <h2>📊 난이도를 조절해볼까요?</h2>
-            <p class="subtitle">기본 추천 범위에서 난이도를 살짝 조정할 수 있어요.</p>
-
-            <div class="range-preview-box">
-                🔭 현재 추천 티어 :<span id="expected-tier-display">데이터를 불러오는 중...</span>
-            </div>
-
-            <div class="difficulty-container">
-                <div class="diff-card" data-value="-2">쉽게</div>
-                <div class="diff-card" data-value="-1">조금 쉽게</div>
-                <div class="diff-card selected" data-value="0">보통</div>
-                <div class="diff-card" data-value="1">조금 어렵게</div>
-                <div class="diff-card" data-value="2">어렵게</div>
-            </div>
-        </div>
-        <script src="../utils.js"></script>
-        <script src="options.js"></script>
-    </body>
+    <script src="../utils.js"></script>
+    <script src="options.js"></script>
+</body>
 </html>

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const goalCards = document.querySelectorAll('.goal-card');
     const statusMsg = document.getElementById('status-msg');
     const diffCards = document.querySelectorAll('.diff-card');
-    const titleMsg = document.getElementById('option-title');
+    const titleMsg = document.getElementById('dashboard-title');
     const goalMsg = {
         'beginner' : '코딩 입문을 위해서는 간단한 브론즈, 실버 문제를 풀며 문법에 익숙해지는 과정이 중요해요!',
         'job' : '코딩테스트의 안정적인 합격을 위해서는 어려운 실버 문제와 골드 문제들을 푸는 연습이 필요해요!',
