@@ -1,0 +1,140 @@
+/* --- 옵션 페이지 레이아웃 (기존 Flex 유지) --- */
+.options-body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    text-align: center;
+    max-width: 800px;
+}
+
+/* --- 텍스트 스타일 오버라이딩 --- */
+.container h1 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.container h2 {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* --- 목표 카드 (Goal Card) --- */
+.goal-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.goal-card {
+    background: white;
+    border: 2px solid #eee;
+    border-radius: 16px;
+    padding: 35px 25px;
+    width: 220px; 
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.goal-card.selected {
+    border-color: #17CE3A;
+    background-color: #f0fff4;
+    box-shadow: 0 0 0 4px rgba(23, 206, 58, 0.1);
+}
+
+.goal-card .icon {
+    font-size: 54px;
+    margin-bottom: 20px;
+}
+
+.goal-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    color: #333;
+}
+
+.goal-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    word-break: keep-all;
+    color: #888;
+}
+
+#status-msg {
+    margin-top: 20px;
+    height: 30px;
+    font-size: 18px;
+    color: #17CE3A;
+    font-weight: bold;
+}
+
+/* --- 난이도 카드 (Difficulty Card) --- */
+.range-preview-box {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 12px 20px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+#expected-tier-display {
+    color: #1b5e20;
+    margin-left: 5px;
+}
+
+.difficulty-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.diff-card {
+    padding: 14px 28px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    color: #666;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.diff-card:hover {
+    background-color: #f8f9fa;
+    border-color: #bbb;
+    transform: translateY(-2px);
+}
+
+.diff-card.selected {
+    background-color: #17CE3A;
+    border-color: #17CE3A;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(23, 206, 58, 0.3);
+}

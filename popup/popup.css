@@ -1,0 +1,47 @@
+/* --- 팝업 레이아웃 --- */
+.popup-body {
+    width: 350px;
+    padding: 20px;
+}
+
+/* --- 팝업 전용 버튼 --- */
+#recommendBtn {
+    width: 100%;
+    background-color: #17CE3A;
+    margin-top: 5px;
+}
+
+#recommendBtn:hover {
+    background-color: #197e2b; 
+}
+
+/* --- 결과 박스 (Result Box) --- */
+#result {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+.problem-link {
+    display: block;
+    background: white;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.problem-link:hover {
+    background: #f1f3f5;
+    border-color: #20C20E;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
