@@ -114,8 +114,15 @@ body.options-body {
 .goal-card h3 { 
     margin: 0; 
     font-size: 18px; /* 18px로 확대됨 */
-    font-weight: 800; 
+    font-weight: 800;
     color: #333; 
+}
+
+.goal-card p { 
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+    line-height: 1.4;
 }
 
 #status-msg {

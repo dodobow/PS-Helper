@@ -1,7 +1,7 @@
 /* --- 팝업 레이아웃 --- */
 .popup-body {
-    width: 350px;
-    padding: 20px;
+    width: 380px;
+    padding: 25px 20px;
 }
 
 /* --- 팝업 전용 버튼 --- */
@@ -44,4 +44,33 @@
     color: #000;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* --- 대시보드 이동 뱃지 버튼 --- */
+.dashboard-badge {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%); /* 제목 높이에 맞춰 세로 중앙 정렬 */
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 20px; /* 알약 모양 */
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    /* 버튼 텍스트와 이모지 정렬 */
+    display: flex;
+    align-items: center;
+    gap: 4px; 
+}
+
+.dashboard-badge:hover {
+    background-color: #f0fff4; /* 연한 초록색 배경 */
+    border-color: #17CE3A; /* 초록색 테두리 */
+    color: #1b5e20;
+    transform: translateY(-50%) scale(1.05); /* 살짝 커지는 효과 */
 }
