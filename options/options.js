@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         updateRecommendRange(userId);
+        loadAnalysis();
         titleMsg.innerHTML = `🎯
         <span style="color: ${userTierInfo.color}; font-weight: bold;">${userId}</span>
         님의 목표는 무엇인가요?`;
@@ -131,7 +132,6 @@ async function loadAnalysis() {
 
     chrome.storage.local.get(['solvedId', 'solvedTier'], async (res) => {
         const userId = res.solvedId;
-        const userTier = res.solvedTier;
 
         if (!userId) {
             spinner.innerHTML = '<p>⚠️ 팝업에서 백준 계정을 먼저 연동해주세요!</p>';
@@ -155,26 +155,51 @@ async function loadAnalysis() {
                 rating = rating * 2 + Math.round(200 * (1 - Math.pow(0.99, data.count)));
                 return {'name' : tag.name, 'rating' : rating, 'tierInfo' : calculateTierInfo(calculateRatingToTier(rating))};
             }));
-            console.log(results);
-            // ---------------------------------------------------------
-            // 📝 [TODO 2] 화면에 카드 그리기 (DOM 조작)
-            // ---------------------------------------------------------
-            // tagGrid.innerHTML = ''; // 그리드 한 번 싹 비워주고
-            // 위에서 만든 results 배열을 forEach로 돌면서 document.createElement('div') 로 카드 만들기!
-            // statusClass (weak, strong, normal)도 내 티어(userTier)랑 비교해서 결정해보기.
+            
+            const totalRating = results.reduce((sum, data) => sum + data.rating, 0);
+            const avgRating = totalRating / 8;
+            let strongTags = [], weakTags = [];
+            tagGrid.innerHTML = '';
+            
+            results.forEach(data => {
+                const tagCard = document.createElement('div');
+                const relativeTagRating = avgRating === 0 ? 0 : (data.rating - avgRating) / avgRating * 100;
+                
+                tagCard.className = 'tag-card';
+                if (relativeTagRating < -10) {
+                    tagCard.classList.add('weak');
+                    weakTags.push(data.name);
+                }
+                else if (relativeTagRating > 10) {
+                    tagCard.classList.add('strong');
+                    strongTags.push(data.name);
+                }
+                else {
+                    tagCard.classList.add('normal');
+                }
+                tagCard.innerHTML = `
+                <span class="tag-name">${data.name}</span>
+                <span class="tag-tier" style="color: ${data.tierInfo.color}">
+                    ${data.tierInfo.name}
+                </span>`;
+                tagGrid.appendChild(tagCard);
+            })
 
-            // ---------------------------------------------------------
-            // 📝 [TODO 3] 한줄평 작성
-            // ---------------------------------------------------------
-            // commentBox.innerHTML = `🔥 DP 보완이 시급해요!`; 
+            let summaryText = '';
+            if (weakTags.length > 0 && strongTags.length > 0) {
+                summaryText = `🔥 <b>${weakTags.join(', ')}</b> 보완이 필요하지만, 💪 <b>${strongTags.join(', ')}</b> 분야는 훌륭해요!`;
+            } else if (weakTags.length > 0) {
+                summaryText = `🔥 <b>${weakTags.join(', ')}</b> 보완이 필요해요!`;
+            } else if (strongTags.length > 0) {
+                summaryText = `💪 <b>${strongTags.join(', ')}</b> 분야에서 강점을 보이고 있어요!`;
+            } else {
+                summaryText = `⚖️ 모든 태그가 놀라울 정도로 균형 잡혀 있어요!`;
+            }
+            commentBox.innerHTML = summaryText;
 
-
-            // 👉 모든 로직이 무사히 끝났다면 화면 전환: 로딩 끄고, 결과창 켜기
-            setTimeout(() => {
-                spinner.style.display = 'none';
-                resultBox.style.display = 'block';
-                console.log("UI 렌더링 완료!");
-            }, 1000);
+            spinner.style.display = 'none';
+            resultBox.style.display = 'block';
+            console.log("UI 렌더링 완료!");
 
         } catch (error) {
             console.error("분석 중 에러 발생:", error);

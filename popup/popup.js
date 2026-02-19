@@ -37,30 +37,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function handleSearch(inputField, resultDiv) {
     const userId = inputField.value;
-        if (!userId) {
-            alert('ID를 입력해주세요.');
-            inputField.focus();
-            return;
-        }
-        try {
-            const data = await fetchSolvedData(userId);
-            cachedUserData = data;
-            chrome.storage.local.set({
-                solvedId : userId,
-                solvedTier : data.tier
-            });
-            
-            const tierInfo = calculateTierInfo(data.tier);
-            updateResultUI(resultDiv, data, tierInfo);
+    if (!userId) {
+        alert('ID를 입력해주세요.');
+        inputField.focus();
+        return;
+    }
+    try {
+        const data = await fetchSolvedData(userId);
+        cachedUserData = data;
+        chrome.storage.local.set({
+            solvedId : userId,
+            solvedTier : data.tier
+        });
+        
+        const tierInfo = calculateTierInfo(data.tier);
+        updateResultUI(resultDiv, data, tierInfo);
 
-            const recommendSection = document.getElementById('recommend-section');
-            if (recommendSection) {
-                recommendSection.style.display = 'block';
-            }
-        } catch (error) {
-            resultDiv.innerHTML = `<span style="color: red;">${error.message}</span>`;
-            document.getElementById('recommend-section').style.display = 'none';
+        const recommendSection = document.getElementById('recommend-section');
+        if (recommendSection) {
+            recommendSection.style.display = 'block';
         }
+    } catch (error) {
+        resultDiv.innerHTML = `<span style="color: red;">${error.message}</span>`;
+        document.getElementById('recommend-section').style.display = 'none';
+    }
 }
 
 async function fetchSolvedData(userId) {
