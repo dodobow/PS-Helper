@@ -1,3 +1,19 @@
+function calculateRatingToTier(rating) {
+    const TIER_RATING = [
+        0,
+        30, 60, 90, 120, 150,
+        200, 300, 400, 500, 650,
+        800, 950, 1100, 1250, 1400,
+        1600, 1750, 1900, 2000, 2100,
+        2200, 2300, 2400, 2500, 2600,
+        2700, 2800, 2850, 2900, 2950,
+        3000, 9999
+    ]
+    for (let i = 0; i < TIER_RATING.length; i++) {
+        if (rating < TIER_RATING[i + 1]) return i;
+    }
+}
+
 function calculateTierInfo(tierNum) {
     const TIER_COLORS = [
         '#000000',

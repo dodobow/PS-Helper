@@ -106,3 +106,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+const TARGET_TAGS = [
+    { key: 'dp', name: '다이나믹 프로그래밍' },
+    { key: 'implementation', name: '구현' },
+    { key: 'graphs', name: '그래프 이론' },
+    { key: 'greedy', name: '그리디 알고리즘' },
+    { key: 'data_structures', name: '자료 구조' },
+    { key: 'string', name: '문자열' },
+    { key: 'math', name: '수학' },
+    { key: 'geometry', name: '기하학' }
+];
+
+document.getElementById('refresh-analysis-btn').addEventListener('click', loadAnalysis);
+
+async function loadAnalysis() {
+    const spinner = document.getElementById('loading-spinner');
+    const resultBox = document.getElementById('analysis-result');
+    const tagGrid = document.getElementById('tag-grid');
+    const commentBox = document.getElementById('analysis-comment');
+    
+    spinner.style.display = 'block';
+    resultBox.style.display = 'none';
+
+    chrome.storage.local.get(['solvedId', 'solvedTier'], async (res) => {
+        const userId = res.solvedId;
+        const userTier = res.solvedTier;
+
+        if (!userId) {
+            spinner.innerHTML = '<p>⚠️ 팝업에서 백준 계정을 먼저 연동해주세요!</p>';
+            return;
+        }
+
+        try {
+            console.log(`[분석 시작] ${userId} 님의 데이터를 가져옵니다...`);
+            
+            const results = await Promise.all(TARGET_TAGS.map(async (tag) => {
+                const queryString = `s@${userId} #${tag.key}`;
+                const url = `https://solved.ac/api/v3/search/problem?query=${encodeURIComponent(queryString)}&sort=level&direction=desc`
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`API 통신 실패 (${tag.name}): ${response.status}`);
+                }
+
+                const data = await response.json();
+                let rating = 0;
+                data.items.forEach(problem => {rating += problem.level;})
+                rating = rating * 2 + Math.round(200 * (1 - Math.pow(0.99, data.count)));
+                return {'name' : tag.name, 'rating' : rating, 'tierInfo' : calculateTierInfo(calculateRatingToTier(rating))};
+            }));
+            console.log(results);
+            // ---------------------------------------------------------
+            // 📝 [TODO 2] 화면에 카드 그리기 (DOM 조작)
+            // ---------------------------------------------------------
+            // tagGrid.innerHTML = ''; // 그리드 한 번 싹 비워주고
+            // 위에서 만든 results 배열을 forEach로 돌면서 document.createElement('div') 로 카드 만들기!
+            // statusClass (weak, strong, normal)도 내 티어(userTier)랑 비교해서 결정해보기.
+
+            // ---------------------------------------------------------
+            // 📝 [TODO 3] 한줄평 작성
+            // ---------------------------------------------------------
+            // commentBox.innerHTML = `🔥 DP 보완이 시급해요!`; 
+
+
+            // 👉 모든 로직이 무사히 끝났다면 화면 전환: 로딩 끄고, 결과창 켜기
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                resultBox.style.display = 'block';
+                console.log("UI 렌더링 완료!");
+            }, 1000);
+
+        } catch (error) {
+            console.error("분석 중 에러 발생:", error);
+            spinner.innerHTML = '<p>❌ 데이터를 분석하는 중 오류가 발생했습니다.</p>';
+        }
+    });
+}
