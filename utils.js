@@ -33,7 +33,8 @@ function calculateTierInfo(tierNum) {
     } else {
         name = ['Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Ruby'][Math.floor((tierNum - 1) / 5)] + ' ' + ['V', 'IV', 'III', 'II', 'I'][(tierNum + 4) % 5];
     }
-    return {name, color : TIER_COLORS[tierNum]};
+    const badgeUrl = `https://static.solved.ac/tier_small/${tierNum}.svg`;
+    return {name, color : TIER_COLORS[tierNum], badgeUrl};
 }
 
 function calculateRecommendTier(userTier, userGoal, userDiff) {

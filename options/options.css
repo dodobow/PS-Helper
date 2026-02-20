@@ -233,7 +233,8 @@ body.options-body {
 
 .tag-name { 
     font-size: 14px; /* 14px로 확대됨 */
-    color: #666; 
+    font-weight: 600; 
+    color: #333; 
     display: block; 
     margin-bottom: 4px; 
 }
