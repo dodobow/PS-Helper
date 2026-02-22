@@ -19,23 +19,29 @@ body.options-body {
 }
 
 .dashboard-header h1 {
-    font-size: 34px; /* 34px로 확대됨 */
+    font-size: 34px;
     color: #333;
     margin-bottom: 10px;
 }
 
 .dashboard-header p {
-    font-size: 16px; /* 16px로 확대됨 */
+    font-size: 16px;
     color: #666;
     margin: 0;
 }
 
-/* 2단 그리드 (왼쪽 1.6 : 오른쪽 1) */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1.6fr 1fr;
     gap: 20px;
-    align-items: start;
+    align-items: stretch;
+}
+
+.left-column,
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* --- 2. 공통 카드 UI (Card Style) --- */
@@ -59,7 +65,7 @@ body.options-body {
 }
 
 .card-header h2 {
-    font-size: 20px; /* 20px로 확대됨 */
+    font-size: 20px;
     margin: 0;
     color: #333;
     font-weight: 700;
@@ -70,7 +76,7 @@ body.options-body {
 }
 
 .section-label {
-    font-size: 16px; /* 16px로 확대됨 */
+    font-size: 16px;
     font-weight: bold;
     color: #666;
     margin-bottom: 12px;
@@ -107,13 +113,13 @@ body.options-body {
 }
 
 .goal-card .icon { 
-    font-size: 42px; /* 42px로 확대됨 */
+    font-size: 42px;
     margin-bottom: 10px; 
 }
 
 .goal-card h3 { 
     margin: 0; 
-    font-size: 18px; /* 18px로 확대됨 */
+    font-size: 18px;
     font-weight: 800;
     color: #333; 
 }
@@ -128,26 +134,24 @@ body.options-body {
 #status-msg {
     margin-top: 15px;
     height: 20px;
-    font-size: 16px; /* 16px로 확대됨 */
+    font-size: 16px;
     color: #17CE3A;
     font-weight: bold;
     text-align: center;
 }
 
-/* 난이도 미리보기 박스 */
 .range-preview-box {
     background-color: #e8f5e9;
     color: #2e7d32;
-    padding: 14px; /* 패딩 14px로 증가 */
+    padding: 14px;
     border-radius: 8px;
     display: block;
     margin-bottom: 20px;
     font-weight: bold;
-    font-size: 16px; /* 16px로 확대됨 */
+    font-size: 16px;
     text-align: center;
 }
 
-/* 난이도 버튼 */
 .difficulty-container {
     display: flex;
     justify-content: center;
@@ -156,21 +160,27 @@ body.options-body {
 }
 
 .diff-card {
-    padding: 12px 20px; /* 패딩 증가 */
+    padding: 12px 20px;
     background: white;
     border: 1px solid #ddd;
     border-radius: 50px;
     color: #666;
-    font-size: 16px; /* 16px로 확대됨 */
+    font-size: 16px;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .diff-card.selected {
-    background-color: #17CE3A;
+    background-color: #f0fff4;
     border-color: #17CE3A;
-    color: white;
+    box-shadow: 0 0 0 3px rgba(23, 206, 58, 0.1);
+    color: #333;
     font-weight: bold;
+}
+
+.diff-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 /* --- 4. [오른쪽] 내실 분석 패널 --- */
@@ -195,7 +205,6 @@ body.options-body {
     color: #333;
 }
 
-/* 로딩 스피너 */
 .spinner-container { 
     text-align: center; 
     padding: 40px 0; 
@@ -215,7 +224,6 @@ body.options-body {
     100% { transform: rotate(360deg); } 
 }
 
-/* 태그 그리드 (2열) */
 .tag-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -232,7 +240,7 @@ body.options-body {
 }
 
 .tag-name { 
-    font-size: 14px; /* 14px로 확대됨 */
+    font-size: 14px;
     font-weight: 600; 
     color: #333; 
     display: block; 
@@ -240,12 +248,11 @@ body.options-body {
 }
 
 .tag-tier { 
-    font-size: 20px; /* 20px로 확대됨 */
+    font-size: 20px;
     font-weight: 800; 
     display: block; 
 }
 
-/* 상태별 색상 */
 .tag-card.weak { border: 2px solid #ff8787; background-color: #fff5f5; }
 .tag-card.strong { border: 2px solid #69db7c; background-color: #f0fff4; }
 .tag-card.normal { border: 2px solid #e9ecef; }

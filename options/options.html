@@ -17,71 +17,117 @@
 
         <main class="dashboard-grid">
             
-            <section class="card settings-panel">
-                <div class="card-header">
-                    <h2>🎯 목표 및 난이도 설정</h2>
-                </div>
-                
-                <div class="card-body">
-                    <p class="section-label">🧐 나의 목표는?</p>
-                    <div class="goal-container">
-                        <div class="goal-card" id="goal-beginner" data-value="beginner">
-                            <div class="icon">🌱</div>
-                            <h3>입문</h3>
-                            <p>기초 문법부터 차근차근<br>코딩을 배우고 싶어요.</p>
-                        </div>
-                        <div class="goal-card" id="goal-job" data-value="job">
-                            <div class="icon">💼</div>
-                            <h3>취업</h3>
-                            <p>취업을 위한 실전 기업<br>코딩테스트 합격이 목표예요.</p>
-                        </div>
-                        <div class="goal-card" id="goal-contest" data-value="contest">
-                            <div class="icon">🏆</div>
-                            <h3>대회</h3>
-                            <p>더 어려운 문제들로<br>대회에 도전하고 싶어요.</p>
-                        </div>
+            <div class="left-column">
+                <section class="card settings-panel">
+                    <div class="card-header">
+                        <h2>🎯 목표 및 난이도 설정</h2>
                     </div>
-                    <div id="status-msg"></div>
-
-                    <div class="divider"></div>
-
-                    <p class="section-label">📊 난이도 미세 조정</p>
-                    <div class="range-preview-box">
-                        🔭 추천 범위 : <span id="expected-tier-display">로딩 중...</span>
-                    </div>
-                    <div class="difficulty-container">
-                        <div class="diff-card" data-value="-2">쉽게</div>
-                        <div class="diff-card" data-value="-1">조금 쉽게</div>
-                        <div class="diff-card selected" data-value="0">보통</div>
-                        <div class="diff-card" data-value="1">조금 어렵게</div>
-                        <div class="diff-card" data-value="2">어렵게</div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="card analysis-panel">
-                <div class="card-header">
-                    <h2>🧬 태그별 강점 약점 분석 리포트</h2>
-                    <button id="refresh-analysis-btn" class="refresh-btn" title="새로고침">🔄</button>
-                </div>
-
-                <div class="card-body">
-                    <p class="subtitle-small">Solved.ac 데이터를 기반으로 8개 태그를 자세히 분석합니다.</p>
                     
-                    <div id="analysis-container">
-                        <div id="loading-spinner" class="spinner-container">
-                            <div class="spinner"></div>
-                            <p>데이터 분석 중...</p>
+                    <div class="card-body">
+                        <p class="section-label">🧐 나의 목표는?</p>
+                        <div class="goal-container">
+                            <div class="goal-card" id="goal-beginner" data-value="beginner">
+                                <div class="icon">🌱</div>
+                                <h3>입문</h3>
+                                <p>기초 문법부터 차근차근<br>코딩을 배우고 싶어요.</p>
+                            </div>
+                            <div class="goal-card" id="goal-job" data-value="job">
+                                <div class="icon">💼</div>
+                                <h3>취업</h3>
+                                <p>취업을 위한 실전 기업<br>코딩테스트 합격이 목표예요.</p>
+                            </div>
+                            <div class="goal-card" id="goal-contest" data-value="contest">
+                                <div class="icon">🏆</div>
+                                <h3>대회</h3>
+                                <p>더 어려운 문제들로<br>대회에 도전하고 싶어요.</p>
+                            </div>
                         </div>
+                        <div id="status-msg"></div>
 
-                        <div id="analysis-result" style="display: none;">
-                            <div class="summary-box" id="analysis-comment"></div>
-                            <div class="tag-grid" id="tag-grid"></div>
+                        <div class="divider"></div>
+
+                        <p class="section-label">📊 난이도 미세 조정</p>
+                        <div class="range-preview-box">
+                            🔭 추천 범위 : <span id="expected-tier-display">로딩 중...</span>
+                        </div>
+                        <div class="difficulty-container">
+                            <div class="diff-card" data-value="-2">쉽게</div>
+                            <div class="diff-card" data-value="-1">조금 쉽게</div>
+                            <div class="diff-card selected" data-value="0">보통</div>
+                            <div class="diff-card" data-value="1">조금 어렵게</div>
+                            <div class="diff-card" data-value="2">어렵게</div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
+                <section class="card extra-panel" style="flex: 1; min-height: 120px; display: flex; align-items: center; justify-content: center; border: 2px dashed #ccc; background: #fdfdfd; box-shadow: none;">
+                    <div style="text-align: center; color: #888;">
+                        <span style="font-size: 32px; display: block; margin-bottom: 10px;">🛠️</span>
+                        <h3 style="margin: 0; font-size: 16px;">새로운 기능 준비 중</h3>
+                        <p style="font-size: 13px; margin-top: 5px;">어떤 기능이 추가될까요?</p>
+                    </div>
+                </section>
+
+            </div>
+
+            <div class="right-column">
+
+                <section class="card analysis-panel">
+                    <div class="card-header">
+                        <h2>🧬 태그별 강점 약점 분석 리포트</h2>
+                        <button id="refresh-analysis-btn" class="refresh-btn" title="새로고침">🔄</button>
+                    </div>
+
+                    <div class="card-body">
+                        <p class="subtitle-small">Solved.ac 데이터를 기반으로 8개 태그를 자세히 분석합니다.</p>
+                        
+                        <div id="analysis-container">
+                            <div id="loading-spinner" class="spinner-container">
+                                <div class="spinner"></div>
+                                <p>데이터 분석 중...</p>
+                            </div>
+
+                            <div id="analysis-result" style="display: none;">
+                                <div class="summary-box" id="analysis-comment"></div>
+                                <div class="tag-grid" id="tag-grid"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card inner-panel">
+                        <div class="card-header">
+                            <h2>💎 내실 테스트</h2>
+                            <button id="refresh-inner-btn" class="refresh-btn" title="새로고침" style="display: none;">🔄</button>
+                        </div>
+
+                        <div class="card-body">
+                            <p class="subtitle-small">상위 100문제와 상위 101~200위 문제들의 난이도를 비교하여 내실을 분석합니다.</p>
+                            
+                            <div id="inner-start-box" style="text-align: center; padding: 10px 0;">
+                                <button id="start-inner-btn" style="width: 100%; font-size: 16px;">내실 분석 시작하기 🚀</button>
+                            </div>
+
+                            <div id="inner-loading" class="spinner-container" style="display: none;">
+                                <div class="spinner"></div>
+                                <p>내 진짜 실력을 파헤치는 중...</p>
+                            </div>
+
+                            <div id="inner-result" style="display: none; text-align: center;">
+                                <div class="summary-box" id="inner-comment"></div>
+                                
+                                <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 15px;">
+                                    <img id="inner-badge" src="" alt="badge" style="height: 36px; transform: translateY(2px);">
+                                    <span id="inner-tier-text" style="font-size: 24px; font-weight: 900;"></span>
+                                </div>
+                                
+                                <div style="margin-top: 10px; font-size: 15px; color: #666;">
+                                    내실 레이팅: <span id="inner-rating-text" style="font-weight: bold; color: #17CE3A;"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
         </main>
     </div>
 
