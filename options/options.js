@@ -157,7 +157,7 @@ async function loadAnalysis() {
             }));
             
             const totalRating = results.reduce((sum, data) => sum + data.rating, 0);
-            const avgRating = totalRating / 8;
+            const avgRating = totalRating / TARGET_TAGS.length;
             let strongTags = [], weakTags = [];
             tagGrid.innerHTML = '';
             
