@@ -46,8 +46,11 @@ async function handleSearch(inputField, resultDiv) {
         const data = await fetchSolvedData(userId);
         cachedUserData = data;
         chrome.storage.local.set({
-            solvedId : userId,
-            solvedTier : data.tier
+            solvedId : data.handle,
+            solvedTier : data.tier,
+            solvedRating : data.rating,
+            solvedCount : data.solvedCount,
+            solvedRatingByProblemsSum : data.ratingByProblemsSum
         });
         
         const tierInfo = calculateTierInfo(data.tier);

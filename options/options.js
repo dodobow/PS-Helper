@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const goalKey = `goal_${userId}`;
         const diffKey = `diff_${userId}`;
         chrome.storage.local.get(['solvedTier', goalKey, diffKey], (res) => {
-            console.log(res);
             const userTier = res.solvedTier;
             const userGoal = res[goalKey];
             const userDiff = parseInt(res[diffKey] ? res[diffKey] : '0');
@@ -139,8 +138,6 @@ async function loadAnalysis() {
         }
 
         try {
-            console.log(`[분석 시작] ${userId} 님의 데이터를 가져옵니다...`);
-            
             const results = await Promise.all(TARGET_TAGS.map(async (tag) => {
                 const queryString = `s@${userId} #${tag.key}`;
                 const url = `https://solved.ac/api/v3/search/problem?query=${encodeURIComponent(queryString)}&sort=level&direction=desc`
@@ -187,7 +184,6 @@ async function loadAnalysis() {
                 </div>`;
                 tagGrid.appendChild(tagCard);
             })
-
             let summaryText = '';
             if (weakTags.length > 0 && strongTags.length > 0) {
                 summaryText = `🔥 <b>${weakTags.join(', ')}</b> 보완이 필요하지만, 💪 <b>${strongTags.join(', ')}</b> 분야는 훌륭해요!`;
@@ -202,11 +198,80 @@ async function loadAnalysis() {
 
             spinner.style.display = 'none';
             resultBox.style.display = 'block';
-            console.log("UI 렌더링 완료!");
 
         } catch (error) {
             console.error("분석 중 에러 발생:", error);
             spinner.innerHTML = '<p>❌ 데이터를 분석하는 중 오류가 발생했습니다.</p>';
+        }
+    });
+}
+
+document.getElementById('start-inner-btn').addEventListener('click', calcInnerRating);
+
+async function calcInnerRating() {
+    const startBox = document.getElementById('inner-start-box');
+    const loadingSpinner = document.getElementById('inner-loading');
+    const resultBox = document.getElementById('inner-result');
+
+    startBox.style.display = 'none';
+    loadingSpinner.style.display = 'block';
+    resultBox.style.display = 'none';
+
+    chrome.storage.local.get(['solvedId', 'solvedRatingByProblemsSum', 'solvedCount'], async (res) => {
+        const userId = res.solvedId;
+        const ratingBy100Problem = res.solvedRatingByProblemsSum;
+        const solvedCount = res.solvedCount;
+        
+        if (!userId) {
+            loadingSpinner.innerHTML = '<p>⚠️ 팝업에서 백준 계정을 먼저 연동해주세요!</p>';
+            return;
+        }
+        try {            
+            const pageNums = [2, 3, 4];
+            ratingBySeq = [0, 0, 0]
+            await Promise.all(pageNums.map(async (pageNum) => {
+                const url = `https://solved.ac/api/v3/search/problem?query=s@${userId}&sort=level&direction=desc&page=${pageNum}`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`API 통신 실패 (${pageNum}): ${response.status}`);
+                }
+                const data = await response.json();
+                data.items.forEach(problem => {ratingBySeq[pageNum - 2] += problem.level});
+            }))
+
+            const ratingBy1to50 = ratingBy100Problem - ratingBySeq[0];
+            const ratingBy51to100 = ratingBySeq[0];
+            const ratingBy101to150 = ratingBySeq[1];
+            const ratingBy151to200 = ratingBySeq[2];
+
+            let innerStabilty = -1;
+            if (solvedCount >= 200) {
+                innerStabilty = Math.round(((ratingBy101to150 + ratingBy151to200) / (ratingBy1to50 + ratingBy51to100) + ((ratingBy101to150 + ratingBy151to200) / 100) / (ratingBy51to100 / 50)) * 5000) / 100
+            }
+
+            let innerStabiltyComment = ''
+            if (innerStabilty === -1) {
+                innerStabiltyComment = '아직 푼 문제수가 적어서 분석이 힘들어요!<br>지금은 내실 걱정보다 더 많은 문제를 접하는 게 더 도움이 될거예요!';
+            } else if (innerStabilty >= 95) {
+                innerStabiltyComment = '상위 200문제가 <b>매우 균형</b>잡혀 있어요!<br>내실이 <b>완벽하게 다져진</b> 상태입니다.';
+            } else if (innerStabilty >= 90) {
+                innerStabiltyComment = '상위 200문제가 <b>좋은 균형</b>을 이루고 있어요.<br>내실이 <b>잘 다져진</b> 상태입니다.';
+            } else if (innerStabilty >= 85) {
+                innerStabiltyComment = '상위 200문제가 <b>적당한 균형</b>을 이루고 있어요.<br>내실이 <b>무난하게 다져진</b> 상태입니다.';
+            } else if (innerStabilty >= 80) {
+                innerStabiltyComment = '상위 200문제가 <b>조금 불균형</b>해요.<br>내실이 <b>살짝 부족한</b> 상태입니다.';
+            } else {
+                innerStabiltyComment = '상위 200문제가 <b>아주 불균형</b>해요.<br>내실이 <b>매우 부족한</b> 상태입니다.';
+            }
+
+            document.getElementById('inner-comment').innerHTML = innerStabiltyComment;
+            document.getElementById('inner-rating-text').textContent = innerStabilty;
+
+            loadingSpinner.style.display = 'none';
+            resultBox.style.display = 'block';
+        } catch (error) {
+            console.error("내실 분석 중 에러 발생:", error);
+            loadingSpinner.innerHTML = '<p>❌ 데이터를 분석하는 중 오류가 발생했습니다.</p>';
         }
     });
 }
