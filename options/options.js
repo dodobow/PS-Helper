@@ -228,17 +228,23 @@ async function calcInnerRating() {
         }
         try {            
             const pageNums = [2, 3, 4];
-            ratingBySeq = [0, 0, 0]
+            let ratingBySeq = [0, 0, 0];
+            let easyLevel = 0;
+            let hardLevel = 0;
+            
             await Promise.all(pageNums.map(async (pageNum) => {
                 const url = `https://solved.ac/api/v3/search/problem?query=s@${userId}&sort=level&direction=desc&page=${pageNum}`;
                 const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`API 통신 실패 (${pageNum}): ${response.status}`);
-                }
+                
+                if (!response.ok) {throw new Error(`API 통신 실패 (${pageNum}): ${response.status}`);}
+                
                 const data = await response.json();
                 data.items.forEach(problem => {ratingBySeq[pageNum - 2] += problem.level});
-            }))
-
+                
+                if (pageNum === 2 && data.items.length > 0) {hardLevel = data.items[0].level;}
+                if (pageNum === 4 && data.items.length === 50) {easyLevel = data.items[data.items.length - 1].level;}
+            }));
+            
             const ratingBy1to50 = ratingBy100Problem - ratingBySeq[0];
             const ratingBy51to100 = ratingBySeq[0];
             const ratingBy101to150 = ratingBySeq[1];
@@ -246,22 +252,34 @@ async function calcInnerRating() {
 
             let innerStabilty = -1;
             if (solvedCount >= 200) {
-                innerStabilty = Math.round(((ratingBy101to150 + ratingBy151to200) / (ratingBy1to50 + ratingBy51to100) + ((ratingBy101to150 + ratingBy151to200) / 100) / (ratingBy51to100 / 50)) * 5000) / 100
+                innerStabilty = Math.round(((ratingBy101to150 + ratingBy151to200) / (ratingBy1to50 + ratingBy51to100) + ((ratingBy101to150 + ratingBy151to200) / 100) / (ratingBy51to100 / 50)) * 5000) / 100;
             }
 
-            let innerStabiltyComment = ''
+            let innerStabiltyComment = '';
             if (innerStabilty === -1) {
                 innerStabiltyComment = '아직 푼 문제수가 적어서 분석이 힘들어요!<br>지금은 내실 걱정보다 더 많은 문제를 접하는 게 더 도움이 될거예요!';
-            } else if (innerStabilty >= 95) {
-                innerStabiltyComment = '상위 200문제가 <b>매우 균형</b>잡혀 있어요!<br>내실이 <b>완벽하게 다져진</b> 상태입니다.';
-            } else if (innerStabilty >= 90) {
-                innerStabiltyComment = '상위 200문제가 <b>좋은 균형</b>을 이루고 있어요.<br>내실이 <b>잘 다져진</b> 상태입니다.';
-            } else if (innerStabilty >= 85) {
-                innerStabiltyComment = '상위 200문제가 <b>적당한 균형</b>을 이루고 있어요.<br>내실이 <b>무난하게 다져진</b> 상태입니다.';
-            } else if (innerStabilty >= 80) {
-                innerStabiltyComment = '상위 200문제가 <b>조금 불균형</b>해요.<br>내실이 <b>살짝 부족한</b> 상태입니다.';
+                innerStabilty = '무한한 가능성이 있어요!';
             } else {
-                innerStabiltyComment = '상위 200문제가 <b>아주 불균형</b>해요.<br>내실이 <b>매우 부족한</b> 상태입니다.';
+                if (innerStabilty >= 95) {
+                    innerStabiltyComment = '상위 200문제가 <b>매우 균형</b>잡혀 있어요!<br>내실이 <b>완벽하게 다져진</b> 상태입니다.';
+                } else if (innerStabilty >= 90) {
+                    innerStabiltyComment = '상위 200문제가 <b>좋은 균형</b>을 이루고 있어요.<br>내실이 <b>잘 다져진</b> 상태입니다.';
+                } else if (innerStabilty >= 85) {
+                    innerStabiltyComment = '상위 200문제가 <b>적당한 균형</b>을 이루고 있어요.<br>내실이 <b>무난하게 다져진</b> 상태입니다.';
+                } else if (innerStabilty >= 80) {
+                    innerStabiltyComment = '상위 200문제가 <b>조금 불균형</b>해요.<br>내실이 <b>살짝 부족한</b> 상태입니다.';
+                } else {
+                    innerStabiltyComment = '상위 200문제가 <b>아주 불균형</b>해요.<br>내실이 <b>매우 부족한</b> 상태입니다.';
+                }
+                if (innerStabilty < 95) {
+                    const loInfo = calculateTierInfo(easyLevel);
+                    const hiInfo = calculateTierInfo(hardLevel);
+                    const innerRecommendComment = `<br>
+                    <span style="color: ${loInfo.color}; font-weight: bold;">${loInfo.name}</span>
+                    <span> ~ </span>
+                    <span style="color: ${hiInfo.color}; font-weight: bold;">${hiInfo.name}</span>`;
+                    innerStabiltyComment += innerRecommendComment + ' 범위의 문제를 더 풀면<br>내실 향상에 도움이 될거에요!';
+                }
             }
 
             document.getElementById('inner-comment').innerHTML = innerStabiltyComment;
