@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (!userGoal) {
-                rangeSpan.textContent = '목표를 먼저 선택해주세요! 🎯';
+                rangeSpan.textContent = '목표를 먼저 선택해주세요!';
                 return;
             }
 
@@ -57,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateRecommendRange(userId);
         loadAnalysis();
-        titleMsg.innerHTML = `🎯
+        calcInnerRating();
+        titleMsg.innerHTML = `✈️
         <span style="color: ${userTierInfo.color}; font-weight: bold;">${userId}</span>
         님의 목표는 무엇인가요?`;
 
@@ -117,8 +118,6 @@ const TARGET_TAGS = [
     { key: 'math', name: '수학' },
     { key: 'geometry', name: '기하학' }
 ];
-
-document.getElementById('refresh-analysis-btn').addEventListener('click', loadAnalysis);
 
 async function loadAnalysis() {
     const spinner = document.getElementById('loading-spinner');
@@ -205,8 +204,6 @@ async function loadAnalysis() {
         }
     });
 }
-
-document.getElementById('start-inner-btn').addEventListener('click', calcInnerRating);
 
 async function calcInnerRating() {
     const startBox = document.getElementById('inner-start-box');
