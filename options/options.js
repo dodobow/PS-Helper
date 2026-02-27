@@ -185,7 +185,7 @@ async function loadAnalysis() {
             })
             let summaryText = '';
             if (weakTags.length > 0 && strongTags.length > 0) {
-                summaryText = `🔥 <b>${weakTags.join(', ')}</b> 보완이 필요하지만, 💪 <b>${strongTags.join(', ')}</b> 분야는 훌륭해요!`;
+                summaryText = `🔥 <b>${weakTags.join(', ')}</b> 보완이 필요하지만,<br>💪 <b>${strongTags.join(', ')}</b> 분야는 훌륭해요!`;
             } else if (weakTags.length > 0) {
                 summaryText = `🔥 <b>${weakTags.join(', ')}</b> 보완이 필요해요!`;
             } else if (strongTags.length > 0) {

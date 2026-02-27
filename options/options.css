@@ -267,6 +267,8 @@ body.options-body {
     color: #333;
     border-left: 4px solid #17CE3A;
     line-height: 1.5;
+    text-align: center; 
+    word-break: keep-all;
 }
 
 /* --- 5. 반응형 (Mobile) --- */
