@@ -284,7 +284,7 @@ async function calcInnerRating() {
                     <span style="color: ${loInfo.color}; font-weight: bold;">${loInfo.name}</span>
                     <span> ~ </span>
                     <span style="color: ${hiInfo.color}; font-weight: bold;">${hiInfo.name}</span>`;
-                    innerStabiltyComment += innerRecommendComment + ' 범위의 문제를 더 풀면<br>내실 향상에 도움이 될거에요!';
+                    innerStabiltyComment += innerRecommendComment + ' 범위의 문제를 더 풀면 내실 향상에 도움이 될거에요!';
                 }
             }
 

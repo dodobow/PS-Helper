@@ -18,20 +18,20 @@ body.options-body {
 }
 
 .dashboard-header h1 {
-    font-size: 34px;
+    font-size: 38px;
     color: #333;
     margin-bottom: 10px;
 }
 
 .dashboard-header p {
-    font-size: 16px;
+    font-size: 18px;
     color: #666;
     margin: 0;
 }
 
 .dashboard-grid {
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
+    grid-template-columns: 1.4fr 1fr;
     gap: 20px;
     align-items: stretch;
 }
@@ -63,7 +63,7 @@ body.options-body {
 }
 
 .card-header h2 {
-    font-size: 20px;
+    font-size: 22px;
     margin: 0;
     color: #333;
     font-weight: 700;
@@ -74,7 +74,7 @@ body.options-body {
 }
 
 .section-label {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     color: #666;
     margin-top: 0px;
@@ -111,19 +111,19 @@ body.options-body {
 }
 
 .goal-card .icon { 
-    font-size: 42px;
+    font-size: 52px;
     margin-bottom: 10px; 
 }
 
 .goal-card h3 { 
     margin: 0; 
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 800;
     color: #333; 
 }
 
 .goal-card p { 
-    font-size: 13px;
+    font-size: 15px;
     color: #666;
     font-weight: 600;
     line-height: 1.4;
@@ -146,7 +146,7 @@ body.options-body {
     display: block;
     margin-bottom: 20px;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
 }
 
@@ -163,7 +163,7 @@ body.options-body {
     border: 1px solid #ddd;
     border-radius: 50px;
     color: #666;
-    font-size: 16px;
+    font-size: 17px;
     cursor: pointer;
     transition: all 0.2s;
 }
@@ -182,7 +182,7 @@ body.options-body {
 }
 
 .subtitle-small {
-    font-size: 13px;
+    font-size: 15px;
     color: #888;
     margin-top: -5px;
     margin-bottom: 15px;
@@ -190,7 +190,7 @@ body.options-body {
 
 .refresh-btn {
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 17px;
     background: transparent;
     color: #888;
     border: 1px solid #ddd;
@@ -222,7 +222,7 @@ body.options-body {
 }
 
 .tag-name { 
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600; 
     color: #333; 
     display: block; 
@@ -240,7 +240,7 @@ body.options-body {
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 10px;
-    font-size: 13px;
+    font-size: 15px;
     color: #333;
     border-left: 4px solid var(--primary-color);
     line-height: 1.5;
@@ -266,7 +266,7 @@ body.options-body {
 }
 
 .group-title {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 800;
     margin: 0 0 10px 5px;
     color: #444;
