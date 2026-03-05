@@ -153,7 +153,8 @@ async function loadAnalysis() {
                 rating = rating * 2 + Math.round(200 * (1 - Math.pow(0.99, data.count)));
                 return {'name' : tag.name, 'rating' : rating, 'tierInfo' : calculateTierInfo(calculateRatingToTier(rating))};
             }));
-            
+            results.sort((a, b) => b.rating - a.rating);
+
             const totalRating = results.reduce((sum, data) => sum + data.rating, 0);
             const avgRating = totalRating / TARGET_TAGS.length;
             let strongTags = [], weakTags = [];
