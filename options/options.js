@@ -55,16 +55,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        updateRecommendRange(userId);
-        loadAnalysis(userId);
-        calcInnerRating();
-        setupToggle(userId);
+        
         titleMsg.innerHTML = `✈️
         <span style="color: ${userTierInfo.color}; font-weight: bold;">${userId}</span>
         님의 목표는 무엇인가요?`;
 
         const goalKey = `goal_${userId}`;
-        chrome.storage.local.get([goalKey], (result) => {
+        const diffKey = `diff_${userId}`;
+        const modeKey = `mode_${userId}`;
+
+        chrome.storage.local.get([goalKey, diffKey, modeKey], (result) => {
             const savedGoal = result[goalKey];
             if (savedGoal) {
                 const targetCard = document.querySelector(`.goal-card[data-value="${savedGoal}"]`);
@@ -73,14 +73,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     updateStatusMessage(savedGoal);
                 }
             }
-        });
-        
-        const diffKey = `diff_${userId}`;
-        chrome.storage.local.get([diffKey], (result) => {
+
             const targetValue = result[diffKey] ? result[diffKey] : '0';
             diffCards.forEach(c => c.classList.remove('selected'));
             const targetCard = document.querySelector(`.diff-card[data-value="${targetValue}"]`);
             if (targetCard) targetCard.classList.add('selected');
+
+            if (result[modeKey]) {
+                isCustomMode = true;
+                const toggleContainer = document.getElementById('tag-toggle');
+                if (toggleContainer) {
+                    toggleContainer.classList.add('custom-mode');
+                }
+            }
+            updateRecommendRange(userId);
+            setupToggle(userId);
+            loadAnalysis(userId);
+            calcInnerRating();
         });
 
         goalCards.forEach(card => {
@@ -163,12 +172,16 @@ let isCustomMode = false;
 
 function setupToggle(userId) {
     const toggleContainer = document.getElementById('tag-toggle');
-    
     if (!toggleContainer) return;
+    
+    const modeKey = `mode_${userId}`;
+    
     toggleContainer.addEventListener('click', () => {
         isCustomMode = !isCustomMode
         toggleContainer.classList.toggle('custom-mode');
-        loadAnalysis(userId);
+        chrome.storage.local.set({[modeKey] : isCustomMode}, () => {
+            loadAnalysis(userId);
+        });
     });
 }
 
