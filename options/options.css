@@ -9,7 +9,7 @@ body.options-body {
 .dashboard-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 40px 20px;
+    padding: 20px;
 }
 
 .dashboard-header {
@@ -18,7 +18,7 @@ body.options-body {
 }
 
 .dashboard-header h1 {
-    font-size: 38px;
+    font-size: 36px;
     color: #333;
     margin-bottom: 10px;
 }
@@ -58,12 +58,12 @@ body.options-body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 64px; 
+    min-height: 72px; 
     box-sizing: border-box;
 }
 
 .card-header h2 {
-    font-size: 22px;
+    font-size: 20px;
     margin: 0;
     color: #333;
     font-weight: 700;
@@ -85,7 +85,7 @@ body.options-body {
 .goal-container {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 20px;
 }
 
 .goal-card {
@@ -117,13 +117,13 @@ body.options-body {
 
 .goal-card h3 { 
     margin: 0; 
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 800;
     color: #333; 
 }
 
 .goal-card p { 
-    font-size: 15px;
+    font-size: 14px;
     color: #666;
     font-weight: 600;
     line-height: 1.4;
@@ -188,15 +188,6 @@ body.options-body {
     margin-bottom: 15px;
 }
 
-.refresh-btn {
-    padding: 5px 10px;
-    font-size: 17px;
-    background: transparent;
-    color: #888;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
 .refresh-btn:hover {
     background-color: #f1f3f5;
     color: #333;
@@ -230,7 +221,7 @@ body.options-body {
 }
 
 .tag-tier { 
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 800; 
     display: block; 
 }
@@ -240,7 +231,7 @@ body.options-body {
     padding: 12px;
     border-radius: 8px;
     margin-bottom: 10px;
-    font-size: 15px;
+    font-size: 14px;
     color: #333;
     border-left: 4px solid var(--primary-color);
     line-height: 1.5;

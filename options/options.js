@@ -253,7 +253,7 @@ async function loadAnalysis(userId) {
                 <span class="tag-name">${data.name}</span>
                 <div style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 5px;">
                     <img src="${data.tierInfo.badgeUrl}" alt="${data.tierInfo.name}" style="height: 20px; transform: translateY(1px);">
-                    <span class="tag-tier" style="color: ${data.tierInfo.color}; display: inline-block; font-size: 17px; line-height: 1;">
+                    <span class="tag-tier" style="color: ${data.tierInfo.color}; display: inline-block; line-height: 1;">
                         ${data.rating}
                     </span>
                 </div>`;

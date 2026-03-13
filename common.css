@@ -6,7 +6,6 @@
     --highlight-color: #6cebc3;
 }
 
-/* --- 기본 설정 (Reset & Font) --- */
 body {
     font-family: 'Pretendard', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
     background-color: #f7f9fa;
@@ -14,14 +13,12 @@ body {
     margin: 0;
 }
 
-/* --- 공통 타이틀 (기본) --- */
 h1 {
     font-size: 20px;
     margin-bottom: 5px;
     text-align: center;
 }
 
-/* --- 공통 입력창 (Input) --- */
 .input-group {
     display: flex;
     gap: 8px;
@@ -41,7 +38,6 @@ input:focus {
     border-color: var(--primary-color);
 }
 
-/* --- 공통 버튼 (Button) --- */
 button {
     padding: 10px 16px;
     background-color: var(--primary-color);
@@ -57,7 +53,6 @@ button:hover {
     background-color: var(--primary-hover);
 }
 
-/* --- 구분선 (Divider) --- */
 .divider {
     width: 100%;
     height: 1px;
