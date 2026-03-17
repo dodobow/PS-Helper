@@ -120,50 +120,50 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const GOAL_TAGS = {
     'default': [
-        { key : ['#dp'], name : '다이나믹 프로그래밍' },
+        { key : ['#dp'], name : '다이나믹&nbsp;프로그래밍' },
         { key : ['#implementation'], name : '구현' },
-        { key : ['#graphs'], name : '그래프 이론' },
-        { key : ['#greedy'], name : '그리디 알고리즘' },
-        { key : ['#data_structures'], name : '자료 구조' },
+        { key : ['#graphs'], name : '그래프&nbsp;이론' },
+        { key : ['#greedy'], name : '그리디&nbsp;알고리즘' },
+        { key : ['#data_structures'], name : '자료&nbsp;구조' },
         { key : ['#string'], name : '문자열' },
         { key : ['#math'], name : '수학' },
         { key : ['#geometry'], name : '기하학' }
     ],
     'beginner': [
         {key : ['#implementation', '#simulation'], name : '구현'},
-        {key : ['#bruteforcing'], name : '브루트포스 알고리즘'},
-        {key : ['#binary_search'], name : '이분 탐색'},
+        {key : ['#bruteforcing'], name : '브루트포스&nbsp;알고리즘'},
+        {key : ['#binary_search'], name : '이분&nbsp;탐색'},
         {key : ['#math', '#arithmetic'], name : '수학'},
-        {key : ['#stack', '#queue', '#deque'], name : '선형 자료구조'},
+        {key : ['#stack', '#queue', '#deque'], name : '선형&nbsp;자료구조'},
         {key : ['#string'], name : '문자열'},
         {key : ['#sorting'], name : '정렬'},
-        {key : ['#ad_hoc'], name : '애드 혹'},
-        {key : ['#recursion', '#set'], name : '재귀 함수와 집합과 맵'},
+        {key : ['#ad_hoc'], name : '애드&nbsp;혹'},
+        {key : ['#recursion', '#set'], name : '재귀&nbsp;함수와&nbsp;집합과&nbsp;맵'},
         {key : ['#dp', '#greedy'], name : '기초 알고리즘'}
     ],
     'job': [
-        {key : ['#dp', '#knapsack', '#dp_tree'], name : '다이나믹 프로그래밍'},
-        {key : ['#greedy'], name : '그리디 알고리즘'},
-        {key : ['#graphs', '#shortest_path', '#bfs', '#dfs'], name : '그래프와 최단 거리'},
-        {key : ['#priority_queue', '#disjoint_set', '#stack', '#queue', '#set', '#deque'], name : '다양한 자료구조'},
-        {key : ['#binary_search', '#parametric_search'], name : '이분 탐색과 응용'},
-        {key : ['#backtracking', '#bruteforcing'], name : '완전 탐색'},
-        {key : ['#simulation', '#implementation', '#case_work'], name : '구현 능력'},
+        {key : ['#dp', '#knapsack', '#dp_tree'], name : '다이나믹&nbsp;프로그래밍'},
+        {key : ['#greedy'], name : '그리디&nbsp;알고리즘'},
+        {key : ['#graphs', '#shortest_path', '#bfs', '#dfs'], name : '그래프와&nbsp;최단&nbsp;거리'},
+        {key : ['#priority_queue', '#disjoint_set', '#stack', '#queue', '#set', '#deque'], name : '다양한&nbsp;자료구조'},
+        {key : ['#binary_search', '#parametric_search'], name : '이분&nbsp;탐색과&nbsp;응용'},
+        {key : ['#backtracking', '#bruteforcing'], name : '완전&nbsp;탐색'},
+        {key : ['#simulation', '#implementation', '#case_work'], name : '구현&nbsp;능력'},
         {key : ['#string'], name : '문자열'},
-        {key : ['#prefix_sum'], name : '누적 합'},
-        {key : ['#two_pointer', '#sliding_window', '#sweeping'], name : '다양한 테크닉'}
+        {key : ['#prefix_sum'], name : '누적&nbsp;합'},
+        {key : ['#two_pointer', '#sliding_window', '#sweeping'], name : '다양한&nbsp;테크닉'}
     ],
     'contest': [
-        {key : ['#segtree', '#lazyprop', '#pst', '#merge_sort_tree'], name : '세그먼트 트리와 응용'},
+        {key : ['#segtree', '#lazyprop', '#pst', '#merge_sort_tree'], name : '세그먼트&nbsp;트리와&nbsp;응용'},
         {key : ['#string', '#kmp', '#trie', '#suffix_array'], name : '문자열'},
-        {key : ['#number_theory', '#probability', '#combinatorics'], name : '정수론과 조합론, 확률론'},
-        {key : ['#ad_hoc'], name : '애드 혹'},
-        {key : ['#greedy'], name : '그리디 알고리즘'},
-        {key : ['#dp', '#dp_tree', '#dp_digit', '#dp_bitfield', '#tsp', '#cht'], name : '다이나믹 프로그래밍'},
-        {key : ['#graphs', '#trees', '#flow', '#mcmf', '#mfmc', '#scc', '#2_sat', '#bipartite_matching', '#lca', '#centroid'], name : '그래프와 트리'},
+        {key : ['#number_theory', '#probability', '#combinatorics'], name : '정수론과&nbsp;조합론,&nbsp;확률론'},
+        {key : ['#ad_hoc'], name : '애드&nbsp;혹'},
+        {key : ['#greedy'], name : '그리디&nbsp;알고리즘'},
+        {key : ['#dp', '#dp_tree', '#dp_digit', '#dp_bitfield', '#tsp', '#cht'], name : '다이나믹&nbsp;프로그래밍'},
+        {key : ['#graphs', '#trees', '#flow', '#mcmf', '#mfmc', '#scc', '#2_sat', '#bipartite_matching', '#lca', '#centroid'], name : '그래프와&nbsp;트리'},
         {key : ['#geometry', '#convex_hull', '#line_intersection', '#rotating_calipers', '#polygon_area'], name : '기하학'},
-        {key : ['#mo', '#offline_queries', '#sqrt_decomposition', '#smaller_to_larger', '#coordinate_compression'], name : '쿼리와 최적화'},
-        {key : ['#bitmask', '#mitm', '#sweeping', '#permutation_cycle_decomposition', '#game_theory', '#sprague_grundy', '#euler_tour_technique'], name : '다양한 테크닉'}
+        {key : ['#mo', '#offline_queries', '#sqrt_decomposition', '#smaller_to_larger', '#coordinate_compression'], name : '쿼리와&nbsp;최적화'},
+        {key : ['#bitmask', '#mitm', '#sweeping', '#permutation_cycle_decomposition', '#game_theory', '#sprague_grundy', '#euler_tour_technique'], name : '다양한&nbsp;테크닉'}
     ]
 }
 
@@ -277,7 +277,7 @@ async function loadAnalysis(userId) {
 
     chrome.storage.local.get([`goal_${userId}`, 'solvedTier'], async (res) => {
         try {
-            const TARGET_TAGS = res[`goal_${userId}`] &&  isCustomMode ? GOAL_TAGS[res[`goal_${userId}`]] : GOAL_TAGS['default'];
+            const TARGET_TAGS = res[`goal_${userId}`] && isCustomMode ? GOAL_TAGS[res[`goal_${userId}`]] : GOAL_TAGS['default'];
             const results = await Promise.all(TARGET_TAGS.map(async (tag) => {
                 const queryString = `s@${userId} (${tag.key.join(' | ')})`;
                 const url = `https://solved.ac/api/v3/search/problem?query=${encodeURIComponent(queryString)}&sort=level&direction=desc`
@@ -424,15 +424,15 @@ async function calcInnerRating() {
                 innerStabilty = '무한한 가능성이 있어요!';
             } else {
                 if (innerStabilty >= 95) {
-                    innerStabiltyComment = '상위 200문제가 <b>매우 균형</b>잡혀 있어요!<br>내실이 <b>완벽하게 다져진</b> 상태입니다.';
+                    innerStabiltyComment = '상위 200문제가 <b>매우 균형</b>잡혀 있어요! 내실이 <b>완벽하게 다져진</b> 상태입니다.';
                 } else if (innerStabilty >= 90) {
-                    innerStabiltyComment = '상위 200문제가 <b>좋은 균형</b>을 이루고 있어요.<br>내실이 <b>잘 다져진</b> 상태입니다.';
+                    innerStabiltyComment = '상위 200문제가 <b>좋은 균형</b>을 이루고 있어요. 내실이 <b>잘 다져진</b> 상태입니다.';
                 } else if (innerStabilty >= 85) {
-                    innerStabiltyComment = '상위 200문제가 <b>적당한 균형</b>을 이루고 있어요.<br>내실이 <b>무난하게 다져진</b> 상태입니다.';
+                    innerStabiltyComment = '상위 200문제가 <b>적당한 균형</b>을 이루고 있어요. 내실이 <b>무난하게 다져진</b> 상태입니다.';
                 } else if (innerStabilty >= 80) {
-                    innerStabiltyComment = '상위 200문제가 <b>조금 불균형</b>해요.<br>내실이 <b>살짝 부족한</b> 상태입니다.';
+                    innerStabiltyComment = '상위 200문제가 <b>조금 불균형</b>해요. 내실이 <b>살짝 부족한</b> 상태입니다.';
                 } else {
-                    innerStabiltyComment = '상위 200문제가 <b>아주 불균형</b>해요.<br>내실이 <b>매우 부족한</b> 상태입니다.';
+                    innerStabiltyComment = '상위 200문제가 <b>아주 불균형</b>해요. 내실이 <b>매우 부족한</b> 상태입니다.';
                 }
                 if (innerStabilty < 95) {
                     const loInfo = calculateTierInfo(easyLevel);

@@ -238,7 +238,6 @@ body.options-body {
     text-align: center; 
     word-break: keep-all;
     text-wrap: balance;
-    text-wrap: pretty;
 }
 
 @media (max-width: 900px) {
