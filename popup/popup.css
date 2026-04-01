@@ -4,13 +4,13 @@
 }
 
 #recommendBtn {
-    background-color: var(--primary-light) !important; /* 연한 민트 배경 */
-    color: var(--primary-color) !important;           /* 진한 초록 글씨 */
+    background-color: var(--primary-light) !important;
+    color: var(--primary-color) !important;
     border: 1px solid var(--highlight-color) !important; 
 }
 
 #recommendBtn:hover {
-    background-color: #cbf3e4 !important; /* hover 시 살짝만 더 진하게 */
+    background-color: #cbf3e4 !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 10px var(--primary-shadow);
 }
@@ -73,14 +73,24 @@
 }
 
 .popup-header {
-    position: relative; 
-    text-align: center; 
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
+    gap: 8px;
+}
+
+.popup-logo-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .popup-header h1 {
-    margin: 0; 
-    display: inline-block;
+    font-size: 18px;
+    margin: 0;
 }
 
 .recommend-box {

@@ -1,11 +1,11 @@
 {
     "manifest_version" : 3,
-    "name" : "PS 길라잡이",
+    "name" : "Algosaurus (알고사우루스)",
     "version" : "0.9.0",
     "description" : "Solved.ac 데이터를 기반으로 PS 학습을 도와주는 확장 프로그램",
     "action" : {
         "default_popup" : "popup/popup.html",
-        "default_title" : "PS 길라잡이 열기"
+        "default_title" : "알고사우루스 열기"
     },
     "host_permissions" : [
         "https://solved.ac/*"
